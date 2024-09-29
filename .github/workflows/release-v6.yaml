@@ -73,5 +73,5 @@ jobs:
         with:
           fail_on_unmatched_files: true
           files: |
-            /tmp/artifacts/ubuntu-latest/sync-keys-${{ steps.get_version.outputs.VERSION }}-linux-amd64.tar.gz
-            /tmp/artifacts/ubuntu-latest/sync-keys-${{ steps.get_version.outputs.VERSION }}-linux-amd64.sha256
+            /tmp/artifacts/ubuntu-latest/enable-v6-${{ steps.get_version.outputs.VERSION }}-linux-amd64.tar.gz
+            /tmp/artifacts/ubuntu-latest/enable-v6-${{ steps.get_version.outputs.VERSION }}-linux-amd64.sha256
