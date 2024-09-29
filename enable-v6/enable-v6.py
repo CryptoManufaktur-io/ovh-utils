@@ -97,7 +97,6 @@ network:
             accept-ra: false
             addresses:
             - {ipV6}
-            gateway6: {gatewayV6}
             match:
                 name: {interface_name}
             nameservers:
@@ -106,6 +105,8 @@ network:
                 - 2001:4860:4860::8844
                 - 2001:41d0:3:163::1
             routes:
+            -   to: default
+                via: {gatewayV6}
             -   to: {gatewayV6}/128
                 via: '::'
 """
@@ -120,10 +121,24 @@ network:
     try:
         subprocess.run(["sudo", "mv", temp_file_path, file_path], check=True)
         print(f"Created {file_path} successfully.")
-        return True
     except subprocess.CalledProcessError:
         print(
             f"Failed to create the netplan configuration file {file_path}. Please check your permissions."
+        )
+        return False
+    try:
+        subprocess.run(["sudo", "chown", "root:root", file_path], check=True)
+    except subprocess.CalledProcessError:
+        print(
+            f"Failed to chown the netplan configuration file {file_path}. Please check your permissions."
+        )
+        return False
+    try:
+        subprocess.run(["sudo", "chmod", "600", file_path], check=True)
+        return True
+    except subprocess.CalledProcessError:
+        print(
+            f"Failed to chmod the netplan configuration file {file_path}. Please check your permissions."
         )
         return False
 
