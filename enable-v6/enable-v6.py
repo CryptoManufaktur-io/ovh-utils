@@ -46,7 +46,7 @@ def modify_network_interfaces(interface_name, ipV6, gatewayV6):
     new_section = f"""
 iface {interface_name} inet6 static
   address {ipV6}
-  dns-nameservers 2001:4860:4860::8888 2001:4860:4860::8844 2001:41d0:3:163::1
+  dns-nameservers 2001:4860:4860::8888 2001:41d0:3:163::1
   gateway {gatewayV6}
 """
 
@@ -102,7 +102,6 @@ network:
             nameservers:
                 addresses:
                 - 2001:4860:4860::8888
-                - 2001:4860:4860::8844
                 - 2001:41d0:3:163::1
             routes:
             -   to: default
